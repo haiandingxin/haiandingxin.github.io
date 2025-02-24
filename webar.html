@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+    <a-scene arjs embedded>
+        <a-text value="Hello AR" color="red" rotation="-90 0 0"></a-text>
+        <!-- <a-image src="assets/bg.jpg" rotation="-90 0 0"></a-image> -->
+        <!-- <a-entity gltf-model="assets/models/cartoon-gltf/scene.gltf" position="0 1 0" animation="property: rotation;to:0 360 0;loop:true; dur:3000"></a-entity> -->
+        <a-marker-camera preset="hiro"></a-marker-camera>
+        <!-- <a-marker-camera type="pattern" url="assets/pattern/figting.patt"></a-marker-camera> -->
+    </a-scene>
+    <script>
+        // JavaScript代码来监听markerFound和markerLost事件
+        window.onload = () => {
+            const sceneEl = document.querySelector('a-scene');
+            const entityEl = document.querySelector('a-entity');
+
+            sceneEl.addEventListener('markerFound', (e) => {
+                entityEl.setAttribute('visible', 'true'); // 标记被找到时，使实体可见
+            });
+
+            sceneEl.addEventListener('markerLost', (e) => {
+                entityEl.setAttribute('visible', 'false'); // 标记丢失时，隐藏实体
+            });
+        };
+    </script>
+</body>
+</html>
